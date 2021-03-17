@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <ul>
+      <li class="element" id="button-toggle">
+        <input type="checkbox" class="toggle-check" id="toggle" hidden />
+        <label class="toggle" for="toggle">Option</label>
+        <div class="slider"><%- include('./slide.ejs'); %></div>
+      </li>
+      <li class="element">
+        <span>Quantity</span>
+        <input
+          type="input"
+          id="quantity"
+          class="quantity"
+          placeholder="type here"
+        />
+      </li>
+    </ul>
+  </body>
+</html>

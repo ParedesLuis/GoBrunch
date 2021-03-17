@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head'); %>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div class="menu"><%- include('./menu.ejs'); %></div>
+      <div class="content">
+        <%- include('./content.ejs',{array,option,quantity});%>
+      </div>
+    </div>
+  </body>
+  <script>
+    const quantity = document.getElementById("quantity");
+    const select = document.getElementById("mySelect");
+    const prevButton = document.getElementById("ant");
+    const nextButton = document.getElementById("sig");
+    const container = document.getElementById("container");
+
+    let check = document.getElementById("button-toggle");
+    let toggle = document.getElementById("toggle");
+
+    let pages = <%= pages %>;
+    let page = <%= page %>;
+
+    const handleChange = (value) => {
+      if (select.value !== "" && quantity.value !== "") {
+        quantity.style.borderColor = "#898989";
+        const arr = [];
+        const n = parseInt(quantity.value);
+        if (n > 0) {
+          window.location.replace(
+            `http://localhost:4000/build_array?option=${select.value}&quantity=${quantity.value}`
+          );
+        }
+      }
+      if (quantity.value === "") {
+        quantity.style.borderColor = "red";
+      }
+    };
+
+    prevButton.addEventListener('click',() => {
+        if((page - 1) >= 0){
+            page--
+            window.location.replace(
+              `http://localhost:4000/page?page=${page}`
+            );
+        }
+    })
+
+    nextButton.addEventListener('click',() => {
+        if((page + 1) < pages){
+            page++
+            window.location.replace(
+              `http://localhost:4000/page?page=${page}`
+            );
+        }
+    })
+
+
+
+    check.addEventListener("click", (e) => {
+      if(e.target.className!=='dropdown' && e.target.className!=='SelectDropdown'){
+        if (!toggle.click) {
+          toggle.checked = false;
+        }
+        if (toggle.click) {
+          let variable = toggle.checked;
+          toggle.checked = !variable;
+        }
+      }
+    });
+
+    container.addEventListener('click',(e) => {
+        if(toggle.checked===true
+        && e.target.className!=='dropdown'
+        && e.target.className!=='element'
+        && e.target.className!=='SelectDropdown'
+        && e.target.className!=='quantity' ){
+          toggle.checked = false;
+        }
+    })
+
+    quantity.addEventListener("keyup", handleChange);
+    select.addEventListener("change", handleChange);
+  </script>
+</html>

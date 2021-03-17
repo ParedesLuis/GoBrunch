@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="lock">
+      <div class="list-items">
+        <% array.forEach(function(item){ %>
+        <div class="item">
+          <div class="icon">
+            <div><%= item.index %></div>
+          </div>
+          <div class="text"><%= item.value %></div>
+        </div>
+        <% }); %>
+      </div>
+      <div class="pagination">
+        <div class="anterior" id="ant"><</div>
+        <div id="sig">></div>
+      </div>
+    </div>
+  </body>
+</html>
